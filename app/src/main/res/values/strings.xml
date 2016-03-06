@@ -1,4 +1,46 @@
 <resources>
-    <string name="app_name">Camarero, camarero</string>
-    <string name="action_settings">Settings</string>
+    <!-- App name -->
+    <string name="app_name">¡Camarero!</string>
+
+    <!-- Activity titles -->
+    <string name="title_activity_new_order">New order</string>
+    <string name="title_activity_new_item">New menu item</string>
+    <string name="title_activity_summary">Summary</string>
+    <string name="title_activity_menu">Menu</string>
+
+    <!-- Option menu items -->
+    <string name="action_goto_menu">Menu</string>
+    <string name="action_goto_summary">Summary</string>
+
+    <!-- Context menu items -->
+    <string name="context_menu_delete">Delete</string>
+    <string name="context_menu_edit">Edit</string>
+    <string name="context_menu_duplicate">Duplicate</string>
+
+    <!-- Dialog items -->
+    <string name="select_menu_item_dialog_title">Select an item</string>
+    <string name="select_menu_item_dialog_tag">SelectItemDialogFragment</string>
+
+    <!-- Labels and hints -->
+    <string name="total_label">Total</string>
+    <string name="revenues_label">Revenues</string>
+    <string name="order_list_label">Order list</string>
+    <string name="completed_orders_label">Completed orders</string>
+
+    <string name="item_price_hint">0.00</string>
+    <string name="order_name_hint">Order name</string>
+    <string name="item_name_hint">Item name</string>
+
+    <!-- Warnings and similar -->
+    <string name="empty_list">No elements to show</string>
+    <string name="no_menu_items">There is no item in the menu!</string>
+    <string name="order_creation_error">Make sure the name is not empty or repeated :)</string>
+    <string name="item_creation_error">Make sure the fields are not empty nor the item name is repeated :)</string>
+    <string name="incorrect_price_input">The entered price is not valid</string>
+
+    <!-- Others -->
+    <string name="confirm_exit">Please click BACK button again to exit the application</string>
+    <string name="currency">$</string>
+    <string name="send_button">Send</string>
+
 </resources>

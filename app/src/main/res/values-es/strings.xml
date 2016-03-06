@@ -1,0 +1,46 @@
+<resources>
+    <!-- App name -->
+    <string name="app_name">¡Camarero!</string>
+
+    <!-- Activity titles -->
+    <string name="title_activity_new_order">Nuevo pedido</string>
+    <string name="title_activity_new_item">Nuevo producto del menú</string>
+    <string name="title_activity_summary">Resumen</string>
+    <string name="title_activity_menu">Menú</string>
+
+    <!-- Option menu items -->
+    <string name="action_goto_menu">Menú</string>
+    <string name="action_goto_summary">Resumen</string>
+
+    <!-- Context menu items -->
+    <string name="context_menu_delete">Eliminar</string>
+    <string name="context_menu_edit">Editar</string>
+    <string name="context_menu_duplicate">Duplicar</string>
+
+    <!-- Dialog items -->
+    <string name="select_menu_item_dialog_title">Selecciona un producto</string>
+    <string name="select_menu_item_dialog_tag">SelectItemDialogFragment</string>
+
+    <!-- Labels and hints -->
+    <string name="total_label">Total</string>
+    <string name="revenues_label">Ingresos</string>
+    <string name="order_list_label">Listado de pedidos</string>
+    <string name="completed_orders_label">Pedidos completados</string>
+
+    <string name="item_price_hint">0.00</string>
+    <string name="order_name_hint">Nombre del pedido</string>
+    <string name="item_name_hint">Nombre del producto</string>
+
+    <!-- Warnings and similar -->
+    <string name="empty_list">No hay elementos para mostrar</string>
+    <string name="no_menu_items">¡No hay ningún producto en el menú!</string>
+    <string name="order_creation_error">Asegúrate de que el nombre no quede vacío ni esté repetido :)</string>
+    <string name="item_creation_error">Asegúrate de que los campos no queden vacíos ni el nombre del producto esté repetido :)</string>
+    <string name="incorrect_price_input">El valor introducido no es válido</string>
+
+    <!-- Others -->
+    <string name="confirm_exit">Pulsa el botón ATRÁS de nuevo para salir de la aplicación</string>
+    <string name="currency">€</string>
+    <string name="send_button">Enviar</string>
+
+</resources>
