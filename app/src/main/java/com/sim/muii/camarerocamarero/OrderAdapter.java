@@ -8,26 +8,29 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.List;
+
 class OrderAdapter extends BaseAdapter {
 
-    private final Context context;
-    private final Order order;
+    private final MenuItemsDataSource menu;
+
+    private final List<OrderItem> orderItems;
     private static LayoutInflater inflater = null;
 
-    public OrderAdapter (Context context, Order order) {
-        this.context = context;
-        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.order = order;
+    public OrderAdapter (Context context, Order order, List<OrderItem> orderItems) {
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.orderItems = orderItems;
+        this.menu = new MenuItemsDataSource(context);
     }
 
     @Override
     public int getCount() {
-        return this.order.getItems().size();
+        return this.orderItems.size();
     }
 
     @Override
     public OrderItem getItem(int position) {
-        return this.order.getItems().get(position);
+        return this.orderItems.get(position);
     }
 
     @Override
@@ -47,11 +50,39 @@ class OrderAdapter extends BaseAdapter {
         nametv = (TextView) vi.findViewById(R.id.item_name_in_list);
         pricetv = (TextView) vi.findViewById(R.id.item_price_in_list);
 
-        amounttv.setText(Integer.toString(this.order.getItems().get(position).getAmount()));
-        nametv.setText(this.order.getItems().get(position).getItem().getName());
-        pricetv.setText(this.order.getItems().get(position).getItem().getPriceString() +
-                context.getString(R.string.currency));
+        menu.open();
+        MenuItem menuItem = menu.getMenuItem(orderItems.get(position).getMenuItemId());
+        menu.close();
+
+        int amount = orderItems.get(position).getAmount();
+        amounttv.setText(String.format("%d", amount));
+        nametv.setText(menuItem.getName());
+        pricetv.setText(String.format("%.02f" + vi.getContext().getString(R.string.currency),
+                menuItem.getPrice() * amount));
 
         return vi;
+    }
+
+    public void remove (OrderItem orderItem) {
+        boolean found = false;
+        int i=0;
+        while (!found && i < orderItems.size()) {
+            OrderItem item = orderItems.get(i);
+            found = item.getOrderId() == orderItem.getOrderId() &&
+                    item.getMenuItemId() == orderItem.getMenuItemId();
+            if(found) {
+                orderItems.remove(i);
+            }
+            i++;
+        }
+    }
+
+    public void add (OrderItem orderItem) {
+        orderItems.add(orderItem);
+    }
+
+    public void incrementItemAmount (int pos) {
+        orderItems.get(pos).setAmount(orderItems.get(pos).getAmount()+1);
+        notifyDataSetChanged();
     }
 }

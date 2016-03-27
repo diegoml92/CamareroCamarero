@@ -16,10 +16,14 @@ import android.widget.Toast;
 
 public class NewOrderActivity extends AppCompatActivity {
 
+    private OrdersDataSource orderList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_order);
+
+        orderList = new OrdersDataSource(this);
 
         final Context context = this;
 
@@ -60,13 +64,25 @@ public class NewOrderActivity extends AppCompatActivity {
 
     private boolean createNewOrder(String name) {
         name = name.trim();
-        if (!name.isEmpty() && !OrderList.orderExists (name)) {
-            OrderList.add(new Order(name));
+        if (!name.isEmpty() && !orderList.orderExists(name)) {
+            orderList.createOrder(name);
             return true;
         } else {
             Toast.makeText(this, R.string.order_creation_error, Toast.LENGTH_SHORT).show();
             return false;
         }
+    }
+
+    @Override
+    public void onResume() {
+        orderList.open();
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        orderList.close();
+        super.onPause();
     }
 
 }

@@ -15,10 +15,15 @@ import android.widget.Toast;
 
 public class NewMenuItemActivity extends AppCompatActivity {
 
+    private MenuItemsDataSource menu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_menu_item);
+
+        menu = new MenuItemsDataSource(this);
+        menu.open();
 
         final Context context = this;
 
@@ -60,7 +65,7 @@ public class NewMenuItemActivity extends AppCompatActivity {
     }
 
     private boolean createNewMenuItem(String name, String price) {
-        if (!name.isEmpty() && !price.isEmpty() && !Menu.menuItemExists(name)) {
+        if (!name.isEmpty() && !price.isEmpty() && !menu.menuItemExists(name)) {
             float pricef;
             try {
                 pricef = Float.parseFloat(price);
@@ -69,11 +74,23 @@ public class NewMenuItemActivity extends AppCompatActivity {
                 return false;
             }
             name = name.trim();
-            Menu.add(new MenuItem(name, pricef));
+            menu.createMenuItem(name, pricef);
             return true;
         } else {
             Toast.makeText(this, R.string.item_creation_error, Toast.LENGTH_SHORT).show();
             return false;
         }
+    }
+
+    @Override
+    public void onResume() {
+        menu.open();
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        menu.close();
+        super.onPause();
     }
 }

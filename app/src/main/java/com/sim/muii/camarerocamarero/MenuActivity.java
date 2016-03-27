@@ -12,22 +12,29 @@ import android.widget.ListView;
 
 public class MenuActivity extends AppCompatActivity {
 
+    private MenuItemsDataSource menu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        menu = new MenuItemsDataSource(this);
+        menu.open();
+
         setContentView(R.layout.activity_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        MenuAdapter menuAdapter = new MenuAdapter (this);
+        MenuAdapter menuAdapter = new MenuAdapter (this, menu.getAllMenuItems());
 
         ListView menulv = (ListView) findViewById(R.id.menu_listview);
 
         menulv.setEmptyView(findViewById(R.id.empty_list_view));
         menulv.setAdapter(menuAdapter);
 
+        // TODO - Editar elemento del menu
         /*menulv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -43,9 +50,14 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         if (v.getId() == R.id.menu_listview) {
-            menu.add(getString(R.string.context_menu_edit));
+            OrdersDataSource orderList = new OrdersDataSource(getApplicationContext());
+            orderList.open();
+            boolean activeOrders = !orderList.allOrdersFinished();
+            orderList.close();
             menu.add(getString(R.string.context_menu_duplicate));
-            menu.add(getString(R.string.context_menu_delete));
+            if(!activeOrders) {
+                menu.add(getString(R.string.context_menu_delete));
+            }
         }
     }
 
@@ -54,26 +66,26 @@ public class MenuActivity extends AppCompatActivity {
         if (item.getTitle().toString().equalsIgnoreCase(getString(R.string.context_menu_delete))) {
             AdapterView.AdapterContextMenuInfo info =
                     (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-            Menu.menu.remove(info.position);
-            ((MenuAdapter) ((ListView) findViewById(R.id.menu_listview)).
-                    getAdapter()).notifyDataSetChanged();
+            MenuAdapter adapter = (MenuAdapter) ((ListView) findViewById(R.id.menu_listview)).
+                    getAdapter();
+            MenuItem menuItem = adapter.getItem(info.position);
+            menu.deleteMenuItem(menuItem);
+            adapter.remove(menuItem);
             return true;
         } else if (item.getTitle().toString().equalsIgnoreCase(getString(R.string.context_menu_duplicate))) {
             AdapterView.AdapterContextMenuInfo info =
                     (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-            MenuItem menuItem = Menu.menu.get(info.position);
+            MenuAdapter adapter = (MenuAdapter) ((ListView) findViewById(R.id.menu_listview)).
+                    getAdapter();
+            MenuItem menuItem = adapter.getItem(info.position);
             int n = 1;
             String name;
             do{
                 name = menuItem.getName() + "_" + n;
                 n++;
-            } while (Menu.menuItemExists(name));
-            Menu.add(new MenuItem(name, menuItem.getPrice()));
-            ((MenuAdapter) ((ListView) findViewById(R.id.menu_listview)).
-                    getAdapter()).notifyDataSetChanged();
-            return true;
-        } else if (item.getTitle().toString().equalsIgnoreCase(getString(R.string.context_menu_edit))) {
-            //TODO - Editar producto del menu
+            } while (menu.menuItemExists(name));
+            menu.createMenuItem(name, menuItem.getPrice());
+            adapter.add(new MenuItem (name, menuItem.getPrice()));
             return true;
         } else {
             return super.onContextItemSelected(item);
@@ -89,6 +101,18 @@ public class MenuActivity extends AppCompatActivity {
     public void addNewMenuItem (View view) {
         Intent intent = new Intent(this, NewMenuItemActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        menu.open();
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        menu.close();
+        super.onPause();
     }
 
 }

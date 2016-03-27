@@ -19,7 +19,9 @@
 
     <!-- Dialog items -->
     <string name="select_menu_item_dialog_title">Select an item</string>
+    <string name="select_menu_item_dialog_empty_title">No more items to add</string>
     <string name="select_menu_item_dialog_tag">SelectItemDialogFragment</string>
+    <string name="ok">@android:string/ok</string>
 
     <!-- Labels and hints -->
     <string name="total_label">Total</string>
@@ -42,5 +44,6 @@
     <string name="confirm_exit">Please click BACK button again to exit the application</string>
     <string name="currency">$</string>
     <string name="send_button">Send</string>
+    <string name="finish_order_button">Finish order</string>
 
 </resources>
