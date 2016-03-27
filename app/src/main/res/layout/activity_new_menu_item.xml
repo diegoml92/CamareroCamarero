@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/currency"
-        android:textSize="26dp"
+        android:textSize="26sp"
         android:gravity="center"
         android:id="@+id/currency_textview"
         android:layout_below="@+id/item_name_edittext"

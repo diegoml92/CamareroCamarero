@@ -2,12 +2,23 @@ package com.sim.muii.camarerocamarero;
 
 public class MenuItem {
 
+    private long _id;
     private String name;
     private float price;
+
+    public MenuItem () {}
 
     public MenuItem (String name, float price) {
         this.name = name;
         this.price = price;
+    }
+
+    public long get_id() {
+        return _id;
+    }
+
+    public void set_id(long _id) {
+        this._id = _id;
     }
 
     public String getName() {

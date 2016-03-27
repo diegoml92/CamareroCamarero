@@ -3,12 +3,32 @@ package com.sim.muii.camarerocamarero;
 
 public class OrderItem {
 
-    private MenuItem item;
+    private long orderId;
+    private long menuItemId;
     private int amount;
 
-    public OrderItem (MenuItem item) {
-        this.item = item;
+    public OrderItem() {}
+
+    public OrderItem(long orderId, long menuItemId) {
+        this.orderId = orderId;
+        this.menuItemId = menuItemId;
         this.amount = 1;
+    }
+
+    public long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
+    }
+
+    public long getMenuItemId() {
+        return menuItemId;
+    }
+
+    public void setMenuItemId(long menuItemId) {
+        this.menuItemId = menuItemId;
     }
 
     public int getAmount() {
@@ -19,15 +39,4 @@ public class OrderItem {
         this.amount = amount;
     }
 
-    public MenuItem getItem() {
-        return item;
-    }
-
-    public void setItem(MenuItem item) {
-        this.item = item;
-    }
-
-    public void incrementAmount () {
-        this.amount++;
-    }
 }

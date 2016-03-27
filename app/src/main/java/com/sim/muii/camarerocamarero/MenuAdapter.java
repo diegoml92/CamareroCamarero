@@ -8,24 +8,28 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.List;
+
 class MenuAdapter extends BaseAdapter {
 
     private final Context context;
     private static LayoutInflater inflater = null;
+    private final List<MenuItem> menu;
 
-    public MenuAdapter (Context context) {
+    public MenuAdapter (Context context, List<MenuItem> menu) {
         this.context = context;
-        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.menu = menu;
     }
 
     @Override
     public int getCount() {
-        return Menu.menu.size();
+        return menu.size();
     }
 
     @Override
     public MenuItem getItem(int position) {
-        return Menu.menu.get(position);
+        return menu.get(position);
     }
 
     @Override
@@ -43,10 +47,20 @@ class MenuAdapter extends BaseAdapter {
         nametv = (TextView) vi.findViewById(R.id.item_name_in_list);
         pricetv = (TextView) vi.findViewById(R.id.item_price_in_list);
 
-        nametv.setText(Menu.menu.get(position).getName());
-        pricetv.setText(Menu.menu.get(position).getPriceString() +
-                context.getString(R.string.currency));
+        nametv.setText(menu.get(position).getName());
+        pricetv.setText(String.format("%.02f" + context.getString(R.string.currency),
+                menu.get(position).getPrice()));
 
         return vi;
+    }
+
+    public void remove (MenuItem menuItem) {
+        menu.remove(menuItem);
+        notifyDataSetChanged();
+    }
+
+    public void add (MenuItem menuItem) {
+        menu.add(menuItem);
+        notifyDataSetChanged();
     }
 }
