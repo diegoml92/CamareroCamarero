@@ -1,4 +1,4 @@
-package com.sim.muii.camarerocamarero;
+package com.sim.muii.camarerocamarero.adapters;
 
 
 import android.content.Context;
@@ -8,9 +8,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.sim.muii.camarerocamarero.commons.MenuItem;
+import com.sim.muii.camarerocamarero.database.MenuItemsDataSource;
+import com.sim.muii.camarerocamarero.commons.Order;
+import com.sim.muii.camarerocamarero.commons.OrderItem;
+import com.sim.muii.camarerocamarero.R;
+
 import java.util.List;
 
-class OrderAdapter extends BaseAdapter {
+public class OrderAdapter extends BaseAdapter {
 
     private final MenuItemsDataSource menu;
 

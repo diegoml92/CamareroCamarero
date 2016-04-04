@@ -1,9 +1,9 @@
-package com.sim.muii.camarerocamarero;
+package com.sim.muii.camarerocamarero.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -14,6 +14,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+
+import com.sim.muii.camarerocamarero.R;
+import com.sim.muii.camarerocamarero.commons.Order;
+import com.sim.muii.camarerocamarero.commons.OrderItem;
+import com.sim.muii.camarerocamarero.database.MenuItemsDataSource;
+import com.sim.muii.camarerocamarero.database.OrderItemsDataSource;
+import com.sim.muii.camarerocamarero.database.OrdersDataSource;
+
 
 /**
  * A placeholder fragment containing a simple view.
@@ -50,13 +59,13 @@ public class MainActivityFragment extends Fragment {
         for(Order order : orderList.getActiveOrders()) {
             Log.d("DIEGO", "\t\t" + order.get_id() + ": " + order.getName() + " - " + order.getPrice());
             for(OrderItem orderItem: orderItems.getAllOrderItems(order.get_id())) {
-                com.sim.muii.camarerocamarero.MenuItem item = menu.getMenuItem(orderItem.getMenuItemId());
+                com.sim.muii.camarerocamarero.commons.MenuItem item = menu.getMenuItem(orderItem.getMenuItemId());
                 Log.d("DIEGO", "\t\t\t+ " + item.getName());
             }
         }
 
         Log.d("DIEGO", "BBDD menu contiene elementos:");
-        for(com.sim.muii.camarerocamarero.MenuItem menuItem : menu.getAllMenuItems()) {
+        for(com.sim.muii.camarerocamarero.commons.MenuItem menuItem : menu.getAllMenuItems()) {
             Log.d("DIEGO", "\t\t" + menuItem.get_id() + ": " + menuItem.getName() + " - " + menuItem.getPrice());
         }
 
@@ -79,6 +88,7 @@ public class MainActivityFragment extends Fragment {
                 Intent intent = new Intent(context, ViewOrderActivity.class);
                 intent.putExtra("order_index", Long.toString(order.get_id()));
                 startActivity(intent);
+                getActivity().finish();
             }
         });
 
@@ -118,6 +128,7 @@ public class MainActivityFragment extends Fragment {
             Intent intent = new Intent(getContext(), ViewOrderActivity.class);
             intent.putExtra("order_index", Long.toString(order.get_id()));
             startActivity(intent);
+            getActivity().finish();
             return true;
         } else {
             return super.onContextItemSelected(item);

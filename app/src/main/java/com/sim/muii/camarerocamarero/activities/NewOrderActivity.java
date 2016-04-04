@@ -1,10 +1,11 @@
-package com.sim.muii.camarerocamarero;
+package com.sim.muii.camarerocamarero.activities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -13,6 +14,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.sim.muii.camarerocamarero.R;
+import com.sim.muii.camarerocamarero.database.OrdersDataSource;
 
 public class NewOrderActivity extends AppCompatActivity {
 
@@ -36,6 +40,7 @@ public class NewOrderActivity extends AppCompatActivity {
                     if (createNewOrder(v.getText().toString())) {
                         Intent intent = new Intent(context, MainActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                     handled = true;
                 }
@@ -51,15 +56,28 @@ public class NewOrderActivity extends AppCompatActivity {
                 if (createNewOrder(editText.getText().toString())) {
                     Intent intent = new Intent(context, MainActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
     }
 
     @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onBackPressed() {
-        Intent intent = NavUtils.getParentActivityIntent(this);
-        NavUtils.navigateUpTo(this,intent);
+        Log.d("DIEGO", "CREAMOS EL INTENT PARA VOLVER A MAIN ACTIVITY");
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private boolean createNewOrder(String name) {

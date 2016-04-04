@@ -1,4 +1,4 @@
-package com.sim.muii.camarerocamarero;
+package com.sim.muii.camarerocamarero.adapters;
 
 
 import android.content.Context;
@@ -8,9 +8,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.sim.muii.camarerocamarero.commons.MenuItem;
+import com.sim.muii.camarerocamarero.R;
+
 import java.util.List;
 
-class MenuAdapter extends BaseAdapter {
+public class MenuAdapter extends BaseAdapter {
 
     private final Context context;
     private static LayoutInflater inflater = null;
@@ -34,7 +37,7 @@ class MenuAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return menu.get(position).get_id();
     }
 
     @Override

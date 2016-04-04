@@ -1,4 +1,4 @@
-package com.sim.muii.camarerocamarero;
+package com.sim.muii.camarerocamarero.activities;
 
 
 import android.app.AlertDialog;
@@ -11,6 +11,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.sim.muii.camarerocamarero.commons.MenuItem;
+import com.sim.muii.camarerocamarero.commons.OrderItem;
+import com.sim.muii.camarerocamarero.R;
+import com.sim.muii.camarerocamarero.adapters.OrderAdapter;
+import com.sim.muii.camarerocamarero.database.MenuItemsDataSource;
+import com.sim.muii.camarerocamarero.database.OrderItemsDataSource;
+import com.sim.muii.camarerocamarero.database.OrdersDataSource;
 
 import java.util.List;
 

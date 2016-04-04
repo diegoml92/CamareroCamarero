@@ -1,4 +1,4 @@
-package com.sim.muii.camarerocamarero;
+package com.sim.muii.camarerocamarero.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.sim.muii.camarerocamarero.R;
+import com.sim.muii.camarerocamarero.adapters.OrderAdapter;
+import com.sim.muii.camarerocamarero.commons.Order;
+import com.sim.muii.camarerocamarero.commons.OrderItem;
+import com.sim.muii.camarerocamarero.database.MenuItemsDataSource;
+import com.sim.muii.camarerocamarero.database.OrderItemsDataSource;
+import com.sim.muii.camarerocamarero.database.OrdersDataSource;
 
 
 public class ViewOrderActivity extends AppCompatActivity {
@@ -82,9 +90,21 @@ public class ViewOrderActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onBackPressed() {
-        Intent intent = NavUtils.getParentActivityIntent(this);
-        NavUtils.navigateUpTo(this, intent);
+        Log.d("DIEGO", "CREAMOS EL INTENT PARA VOLVER A MAIN ACTIVITY DESDE VIEW ORDER");
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

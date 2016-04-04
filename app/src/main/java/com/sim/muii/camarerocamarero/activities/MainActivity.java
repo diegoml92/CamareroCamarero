@@ -1,4 +1,4 @@
-package com.sim.muii.camarerocamarero;
+package com.sim.muii.camarerocamarero.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.sim.muii.camarerocamarero.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,10 +43,12 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_goto_menu) {
             Intent intent = new Intent(this,MenuActivity.class);
             startActivity(intent);
+            finish();
             return true;
         } else if (id == R.id.action_goto_summary) {
             Intent intent = new Intent(this,SummaryActivity.class);
             startActivity(intent);
+            finish();
             return true;
         }
 
@@ -75,5 +79,6 @@ public class MainActivity extends AppCompatActivity {
     public void addNewOrder (View view) {
         Intent intent = new Intent(this, NewOrderActivity.class);
         startActivity(intent);
+        finish();
     }
 }

@@ -1,6 +1,6 @@
-package com.sim.muii.camarerocamarero;
+package com.sim.muii.camarerocamarero.commons;
 
-class Order {
+public class Order {
 
     private long _id;
     private String name;

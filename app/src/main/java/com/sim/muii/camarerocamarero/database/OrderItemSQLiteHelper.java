@@ -1,4 +1,4 @@
-package com.sim.muii.camarerocamarero;
+package com.sim.muii.camarerocamarero.database;
 
 
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.util.Log;
+
+import com.sim.muii.camarerocamarero.R;
 
 class OrderItemSQLiteHelper extends SQLiteOpenHelper {
 

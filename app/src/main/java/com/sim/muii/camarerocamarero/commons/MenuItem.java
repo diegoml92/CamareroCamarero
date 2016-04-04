@@ -1,4 +1,4 @@
-package com.sim.muii.camarerocamarero;
+package com.sim.muii.camarerocamarero.commons;
 
 public class MenuItem {
 
@@ -9,6 +9,12 @@ public class MenuItem {
     public MenuItem () {}
 
     public MenuItem (String name, float price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public MenuItem (long _id, String name, float price) {
+        this._id = _id;
         this.name = name;
         this.price = price;
     }

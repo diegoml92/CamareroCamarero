@@ -1,4 +1,4 @@
-package com.sim.muii.camarerocamarero;
+package com.sim.muii.camarerocamarero.database;
 
 
 import android.content.ContentValues;
@@ -8,10 +8,13 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.sim.muii.camarerocamarero.commons.MenuItem;
+import com.sim.muii.camarerocamarero.commons.OrderItem;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class MenuItemsDataSource {
+public class MenuItemsDataSource {
 
     private SQLiteDatabase database;
     private final MenuSQLiteHelper dbHelper;
@@ -43,6 +46,14 @@ class MenuItemsDataSource {
         MenuItem newMenuItem = cursorToMenuItem(cursor);
         cursor.close();
         Log.d("DIEGO", "PEDIDO AÑADIDO : " + newMenuItem.getName() + " - " + newMenuItem.getPrice());
+    }
+
+    public void updateMenuItem(MenuItem menuItem) {
+        ContentValues values = new ContentValues();
+        values.put(MenuSQLiteHelper.COLUMN_NAME, menuItem.getName());
+        values.put(MenuSQLiteHelper.COLUMN_PRICE, menuItem.getPrice());
+        database.update(MenuSQLiteHelper.TABLE_MENU_ITEMS, values, MenuSQLiteHelper.COLUMN_ID +
+                "=" + menuItem.get_id(), null);
     }
 
     public void deleteMenuItem(MenuItem menuItem) {

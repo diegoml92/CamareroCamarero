@@ -1,4 +1,4 @@
-package com.sim.muii.camarerocamarero;
+package com.sim.muii.camarerocamarero.database;
 
 
 import android.content.ContentValues;
@@ -8,10 +8,14 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.sim.muii.camarerocamarero.commons.MenuItem;
+import com.sim.muii.camarerocamarero.commons.Order;
+import com.sim.muii.camarerocamarero.commons.OrderItem;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class OrdersDataSource {
+public class OrdersDataSource {
 
     private SQLiteDatabase database;
     private final OrderSQLiteHelper dbHelper;

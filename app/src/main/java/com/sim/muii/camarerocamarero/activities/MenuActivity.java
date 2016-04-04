@@ -1,14 +1,22 @@
-package com.sim.muii.camarerocamarero;
+package com.sim.muii.camarerocamarero.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.sim.muii.camarerocamarero.R;
+import com.sim.muii.camarerocamarero.commons.MenuItem;
+import com.sim.muii.camarerocamarero.database.MenuItemsDataSource;
+import com.sim.muii.camarerocamarero.adapters.MenuAdapter;
+import com.sim.muii.camarerocamarero.database.OrdersDataSource;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -34,17 +42,29 @@ public class MenuActivity extends AppCompatActivity {
         menulv.setEmptyView(findViewById(R.id.empty_list_view));
         menulv.setAdapter(menuAdapter);
 
-        // TODO - Editar elemento del menu
-        /*menulv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        final Context context = this;
+
+        menulv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(context, ViewMenuItemActivity.class);
-                intent.putExtra("item_index", Integer.toString(position));
+                Intent intent = new Intent(context, NewMenuItemActivity.class);
+                intent.putExtra("item_index", Long.toString(id));
                 startActivity(intent);
+                finish();
             }
-        });*/
+        });
 
         registerForContextMenu(menulv);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -54,6 +74,9 @@ public class MenuActivity extends AppCompatActivity {
             orderList.open();
             boolean activeOrders = !orderList.allOrdersFinished();
             orderList.close();
+            if(!activeOrders) {
+                menu.add(getString(R.string.context_menu_edit));
+            }
             menu.add(getString(R.string.context_menu_duplicate));
             if(!activeOrders) {
                 menu.add(getString(R.string.context_menu_delete));
@@ -63,7 +86,17 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(android.view.MenuItem item) {
-        if (item.getTitle().toString().equalsIgnoreCase(getString(R.string.context_menu_delete))) {
+        if (item.getTitle().toString().equalsIgnoreCase(getString(R.string.context_menu_edit))) {
+            AdapterView.AdapterContextMenuInfo info =
+                    (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            MenuAdapter adapter = (MenuAdapter) ((ListView) findViewById(R.id.menu_listview)).
+                    getAdapter();
+            Intent intent = new Intent(this, NewMenuItemActivity.class);
+            intent.putExtra("item_index", Long.toString(adapter.getItemId(info.position)));
+            startActivity(intent);
+            finish();
+            return true;
+        } else if (item.getTitle().toString().equalsIgnoreCase(getString(R.string.context_menu_delete))) {
             AdapterView.AdapterContextMenuInfo info =
                     (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
             MenuAdapter adapter = (MenuAdapter) ((ListView) findViewById(R.id.menu_listview)).
@@ -94,13 +127,15 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = NavUtils.getParentActivityIntent(this);
-        NavUtils.navigateUpTo(this,intent);
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     public void addNewMenuItem (View view) {
         Intent intent = new Intent(this, NewMenuItemActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override

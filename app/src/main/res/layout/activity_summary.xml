@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.sim.muii.camarerocamarero.SummaryActivity">
+    tools:context=".activities.SummaryActivity">
 
 
     <TextView
@@ -18,7 +18,9 @@
         android:id="@+id/revenue_label"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,6 +31,12 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/revenue_label"
+        android:background="@android:color/darker_gray"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,7 +45,9 @@
         android:id="@+id/completed_orders_label"
         android:layout_below="@+id/revenue_label"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -47,5 +57,32 @@
         android:layout_alignBottom="@+id/completed_orders_label"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/completed_orders_label"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/top_items"
+        android:id="@+id/top_items_label"
+        android:layout_below="@+id/completed_orders_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/top_items_textview"
+        android:layout_below="@+id/top_items_label"
+        android:textAlignment="textEnd"
+        android:gravity="end"/>
 
 </RelativeLayout>

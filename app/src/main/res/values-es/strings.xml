@@ -5,6 +5,7 @@
     <!-- Activity titles -->
     <string name="title_activity_new_order">Nuevo pedido</string>
     <string name="title_activity_new_item">Nuevo producto del menú</string>
+    <string name="title_activity_new_item2">Editar producto del menú</string>
     <string name="title_activity_summary">Resumen</string>
     <string name="title_activity_menu">Menú</string>
 
@@ -28,6 +29,7 @@
     <string name="revenues_label">Ingresos</string>
     <string name="order_list_label">Listado de pedidos</string>
     <string name="completed_orders_label">Pedidos completados</string>
+    <string name="top_items">Mejores productos</string>
 
     <string name="item_price_hint">0.00</string>
     <string name="order_name_hint">Nombre del pedido</string>
@@ -38,6 +40,7 @@
     <string name="no_menu_items">¡No hay ningún producto en el menú!</string>
     <string name="order_creation_error">Asegúrate de que el nombre no quede vacío ni esté repetido :)</string>
     <string name="item_creation_error">Asegúrate de que los campos no queden vacíos ni el nombre del producto esté repetido :)</string>
+    <string name="item_update_error">Asegúrate que el nombre del producto no esté repedito :)</string>
     <string name="incorrect_price_input">El valor introducido no es válido</string>
 
     <!-- Others -->
