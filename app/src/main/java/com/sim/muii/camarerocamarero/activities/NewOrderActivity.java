@@ -76,7 +76,6 @@ public class NewOrderActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Log.d("DIEGO", "CREAMOS EL INTENT PARA VOLVER A MAIN ACTIVITY");
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();

@@ -38,7 +38,6 @@ public class OrderItemsDataSource {
         values.put(OrderItemSQLiteHelper.COLUMN_ITEM_ID, menuItemId);
         values.put(OrderItemSQLiteHelper.COLUMN_AMOUNT, 1);
         long insertId = database.insert(OrderItemSQLiteHelper.TABLE_ORDER_ITEMS, null, values);
-        Log.d("DIEGO", Long.toString(insertId));
         Cursor cursor = database.query(OrderItemSQLiteHelper.TABLE_ORDER_ITEMS,
                 allColumns, OrderItemSQLiteHelper.COLUMN_ORDER_ID + "=" + orderId + " and " +
                         OrderItemSQLiteHelper.COLUMN_ITEM_ID + "=" + menuItemId,
@@ -61,10 +60,6 @@ public class OrderItemsDataSource {
         Cursor cursor = database.query(OrderItemSQLiteHelper.TABLE_ORDER_ITEMS,
                 allColumns, OrderItemSQLiteHelper.COLUMN_ORDER_ID + "=" + orderId,
                 null, null, null, null);
-
-        for(int i=0; i<cursor.getColumnCount(); i++) {
-            Log.d("DIEGO", cursor.getColumnName(i));
-        }
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {

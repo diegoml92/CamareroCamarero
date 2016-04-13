@@ -92,20 +92,12 @@ public class SummaryActivity extends AppCompatActivity {
                 finished.add(order);
             }
         }
-        Log.d("DIEGO", "HAY " + finished.size() + " PEDIDOS TERMINADOS");
+
         for (Order order : finished) {
             List<OrderItem> items = orderItems.getAllOrderItems(order.get_id());
-            Log.d("DIEGO", "EL PEDIDO TIENE " + items.size() + " ITEMS");
             for(OrderItem item : items) {
                 if(indexes.containsKey(item.getMenuItemId())) {
-                    Log.d("DIEGO", "YA EXISTE " + item.getMenuItemId() + " SE INCREMENTA -> " +
-                            (indexes.get(item.getMenuItemId())+1));
-                    Log.d("DIEGO", "ANTES: " + indexes.get(item.getMenuItemId()));
                     indexes.put(item.getMenuItemId(), indexes.get(item.getMenuItemId()) + 1);
-                    Log.d("DIEGO", "DESPUES: " + indexes.get(item.getMenuItemId()));
-                } else {
-                    Log.d("DIEGO", "NO EXISTE, SE AÑADE " + item.getMenuItemId());
-                            indexes.put(item.getMenuItemId(), 1);
                 }
             }
         }
@@ -114,14 +106,12 @@ public class SummaryActivity extends AppCompatActivity {
         Iterator it = indexes.entrySet().iterator();
         while(it.hasNext()) {
             Map.Entry<Long, Integer> pair = (Map.Entry<Long, Integer>) it.next();
-            Log.d("DIEGO","COMPROBAMOS " + pair.getKey());
             int i = 0;
             boolean improvement = false;
             while (!improvement && i < amount.length) {
                 int k = pair.getValue();
                 improvement = k > amount[i];
                 if (improvement) {
-                    Log.d("DIEGO", "HA MEJORADO " + pair.getKey() + "; TIENE VALOR " + k);
                     try {
                         for(int j=amount.length-1; j>i; j--) {
                             amount[j] = amount[j-1];
@@ -132,12 +122,8 @@ public class SummaryActivity extends AppCompatActivity {
                         ranking[i] = menu.getMenuItem(pair.getKey()).getName() +
                                 " (" + k + ")";
                         amount[i] = k;
-                        Log.d("DIEGO", "Nueva disposición: ");
-                        for(int j=0; j<amount.length; j++) {
-                            Log.d("DIEGO", "" + amount[j]);
-                        }
                     } catch (Exception e) {
-                        Log.e("DIEGO", "YA NO EXISTE ESTE PRODUCTO");
+                        Log.e("SummaryActivity", "YA NO EXISTE ESTE PRODUCTO");
                     }
                 }
                 i++;

@@ -40,14 +40,12 @@ public class NewMenuItemActivity extends AppCompatActivity {
             menuitemId = Long.parseLong(intent.getStringExtra("item_index"));
             menuItem = menu.getMenuItem(menuitemId);
             setTitle(R.string.title_activity_new_item2);
-            Log.d("DIEGO", menuItem.getName() + " - " + String.format("%.02f", menuItem.getPrice()));
             EditText nameet = (EditText) findViewById(R.id.item_name_edittext);
             nameet.setHint(menuItem.getName());
             EditText priceet = (EditText) findViewById(R.id.item_price_input);
             priceet.setHint(String.format("%.02f", menuItem.getPrice()));
 
         } catch (Exception e) {
-            Log.d("DIEGO", "Ha habido una excepcion");
             createItem = true;
         }
 
@@ -124,7 +122,6 @@ public class NewMenuItemActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Log.d("DIEGO", "CREAMOS EL INTENT PARA VOLVER A MENUACTIVITY");
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
         finish();

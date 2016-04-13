@@ -46,27 +46,10 @@ public class MainActivityFragment extends Fragment {
         orderList.open();
         menu.open();
 
-        Log.d("DIEGO", "db inicializadas");
-
-        if(orderList == null) {
-            Log.d("DIEGO", "ORDERLIST NULL");
-        }
-        if(menu == null) {
-            Log.d("DIEGO", "MENU NULL");
-        }
-
-        Log.d("DIEGO", "BBDD orderList contiene elementos:");
         for(Order order : orderList.getActiveOrders()) {
-            Log.d("DIEGO", "\t\t" + order.get_id() + ": " + order.getName() + " - " + order.getPrice());
             for(OrderItem orderItem: orderItems.getAllOrderItems(order.get_id())) {
                 com.sim.muii.camarerocamarero.commons.MenuItem item = menu.getMenuItem(orderItem.getMenuItemId());
-                Log.d("DIEGO", "\t\t\t+ " + item.getName());
             }
-        }
-
-        Log.d("DIEGO", "BBDD menu contiene elementos:");
-        for(com.sim.muii.camarerocamarero.commons.MenuItem menuItem : menu.getAllMenuItems()) {
-            Log.d("DIEGO", "\t\t" + menuItem.get_id() + ": " + menuItem.getName() + " - " + menuItem.getPrice());
         }
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);

@@ -35,7 +35,6 @@ public class OrdersDataSource {
     }
 
     public void createOrder(String name) {
-        Log.d("DIEGO",this.getClass().getName() + "createOrder -> " + name);
         ContentValues values = new ContentValues();
         values.put(OrderSQLiteHelper.COLUMN_NAME, name);
         values.put(OrderSQLiteHelper.COLUMN_PRICE, 0.0);
@@ -47,7 +46,6 @@ public class OrdersDataSource {
         cursor.moveToFirst();
         Order newOrder = cursorToOrder(cursor);
         cursor.close();
-        Log.d("DIEGO","PEDIDO AÑADIDO : " + newOrder.getName() + " - " + newOrder.getPrice());
     }
 
     public void deleteOrder(Order order) {
@@ -110,7 +108,6 @@ public class OrdersDataSource {
     }
 
     public boolean orderExists (String name) {
-        Log.d("DIEGO", "Comprobamos si existe el pedido con nombre : " + name);
         Cursor cursor = database.query(OrderSQLiteHelper.TABLE_ORDERS, allColumns,
                 OrderSQLiteHelper.COLUMN_NAME + " = '" + name + "'", null, null, null, null);
         boolean result = cursor.moveToFirst();
@@ -120,9 +117,6 @@ public class OrdersDataSource {
 
     private Order cursorToOrder (Cursor cursor) {
         Order order = new Order();
-        for (int i = 0; i<cursor.getColumnCount(); i++) {
-            Log.d("DIEGO", cursor.getColumnName(i));
-        }
         order.set_id(cursor.getLong(cursor.getColumnIndex(OrderSQLiteHelper.COLUMN_ID)));
         order.setName(cursor.getString(cursor.getColumnIndex(OrderSQLiteHelper.COLUMN_NAME)));
         order.setPrice(cursor.getFloat(cursor.getColumnIndex(OrderSQLiteHelper.COLUMN_PRICE)));
@@ -137,7 +131,6 @@ public class OrdersDataSource {
         database.update(OrderSQLiteHelper.TABLE_ORDERS, values,
                 OrderSQLiteHelper.COLUMN_ID + " = " + orderId, null);
         Order order = getOrderById(orderId);
-        Log.d("DIEGO", order.getName() + " - " + order.getPrice() + "-" + order.isFinished());
     }
 
     public void recalculatePrice (long orderId, Context context) {

@@ -34,7 +34,6 @@ public class MenuItemsDataSource {
     }
 
     public void createMenuItem(String name, float price) {
-        Log.d("DIEGO", this.getClass().getName() + "createMenuItem -> " + name + " - " + price);
         ContentValues values = new ContentValues();
         values.put(MenuSQLiteHelper.COLUMN_NAME, name);
         values.put(MenuSQLiteHelper.COLUMN_PRICE, price);
@@ -45,7 +44,6 @@ public class MenuItemsDataSource {
         cursor.moveToFirst();
         MenuItem newMenuItem = cursorToMenuItem(cursor);
         cursor.close();
-        Log.d("DIEGO", "PEDIDO AÑADIDO : " + newMenuItem.getName() + " - " + newMenuItem.getPrice());
     }
 
     public void updateMenuItem(MenuItem menuItem) {
@@ -128,9 +126,6 @@ public class MenuItemsDataSource {
 
     private MenuItem cursorToMenuItem(Cursor cursor) {
         MenuItem menuItem = new MenuItem();
-        for (int i = 0; i<cursor.getColumnCount(); i++) {
-            Log.d("DIEGO", cursor.getColumnName(i));
-        }
         menuItem.set_id(cursor.getLong(cursor.getColumnIndex(MenuSQLiteHelper.COLUMN_ID)));
         menuItem.setName(cursor.getString(cursor.getColumnIndex(MenuSQLiteHelper.COLUMN_NAME)));
         menuItem.setPrice(cursor.getFloat(cursor.getColumnIndex(MenuSQLiteHelper.COLUMN_PRICE)));

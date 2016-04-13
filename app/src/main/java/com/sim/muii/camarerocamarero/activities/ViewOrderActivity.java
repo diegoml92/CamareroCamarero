@@ -45,7 +45,6 @@ public class ViewOrderActivity extends AppCompatActivity {
         Intent intent = getIntent();
         orderId = Long.parseLong(intent.getStringExtra("order_index"));
 
-        Log.d("DIEGO", "orderId: " + orderId);
         Order order = orderList.getOrderById(orderId);
 
         setTitle(order.toString());
@@ -101,7 +100,6 @@ public class ViewOrderActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Log.d("DIEGO", "CREAMOS EL INTENT PARA VOLVER A MAIN ACTIVITY DESDE VIEW ORDER");
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
